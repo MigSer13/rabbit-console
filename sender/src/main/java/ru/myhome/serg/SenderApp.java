@@ -31,8 +31,9 @@ public class SenderApp {
                     }
                     channel.basicPublish(EXCHANGE_NAME, key, null, message.getBytes(StandardCharsets.UTF_8));
                     System.out.println("New publication on the topic " + '"' + key + '"' + " - " + message);
+                }else {
+                    System.out.println("Incorrect input.");
                 }
-                System.out.println("Incorrect input.");
                 System.out.println("Enter post topic: ");
             }
             }

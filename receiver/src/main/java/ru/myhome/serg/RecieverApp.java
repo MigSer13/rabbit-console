@@ -18,7 +18,7 @@ public class RecieverApp {
         ) {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
             String queueName = channel.queueDeclare().getQueue();
-            System.out.println("Enter topic of subsribe: ");
+            System.out.println("Enter 'set_topic 'topic'' to subscribe or 'drop_topic 'topic'' to unsubscribe ");
             while (true) {
                 if (scanner.hasNextLine()){
                     String str = scanner.nextLine().trim().toLowerCase();
@@ -31,7 +31,7 @@ public class RecieverApp {
                 if (str.equals("drop_topic " + key)) {
                     channel.queueUnbind(queueName, EXCHANGE_NAME, fullkey);
                     System.out.println("You are unsubscribed from the topic on " + key);
-                    System.out.println("Enter topic of subsribe: ");
+                    System.out.println("Enter 'set_topic 'topic'' to subscribe or 'drop_topic 'topic'' to unsubscribe ");
                 }
 
                 if (str.equals("set_topic " + key)) {
@@ -55,7 +55,7 @@ public class RecieverApp {
                         }
                     };
                     channel.basicConsume(queueName, true, deliverCallback, cancelCallback);
-                    System.out.println("Enter new topic of subsribe: ");
+                    System.out.println("Enter 'set_topic 'topic'' to subscribe or 'drop_topic 'topic'' to unsubscribe ");
                 }
             }}
         }
