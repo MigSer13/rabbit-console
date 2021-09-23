@@ -26,14 +26,16 @@ public class SenderApp {
                 if(scanner.hasNextLine()){
                     //key = "php";
                     key = scanner.nextLine();
-                    break;
+                    if (key.trim().toLowerCase().equals("exit")){
+                        break;
+                    }
+                    channel.basicPublish(EXCHANGE_NAME, key, null, message.getBytes(StandardCharsets.UTF_8));
+                    System.out.println("New publication on the topic " + '"' + key + '"' + " - " + message);
+                }else {
+                    System.out.println("Incorrect input.");
                 }
-                System.out.println("Incorrect input.");
                 System.out.println("Enter post topic: ");
             }
-
-            channel.basicPublish(EXCHANGE_NAME, key, null, message.getBytes(StandardCharsets.UTF_8));
-            System.out.println("New publication on the topic " + '"' + key + '"' + " - " + message);
             }
         }
 }
